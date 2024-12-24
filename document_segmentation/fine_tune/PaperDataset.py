@@ -133,12 +133,12 @@ class CocoLikeDataset(utils.Dataset):
 ##############################
 
 dataset_train = CocoLikeDataset()
-dataset_train.load_data('data/result.json', 'data/images')
+dataset_train.load_data('data/result.json', 'data/train')
 dataset_train.prepare()
 
 #In this example, I do not have annotations for my validation data, so I am loading train data
 dataset_val = CocoLikeDataset()
-dataset_val.load_data('data/result.json', 'data/images')
+dataset_val.load_data('data/result.json', 'data/train')
 dataset_val.prepare()
 
 

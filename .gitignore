@@ -6,3 +6,5 @@
 /document_segmentation/fine_tune/project-2-at-2024-12-24-13-18-f30435c3.zip
 /document_segmentation/fine_tune/mask_rcnn_coco.h5
 /document_segmentation/fine_tune/data/images
+/document_segmentation/fine_tune/data/train
+/document_segmentation/fine_tune/data/test
