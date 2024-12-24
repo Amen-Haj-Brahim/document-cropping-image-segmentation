@@ -1,0 +1,1 @@
+## I used the Mask_RCNN directory to fix a bug regarding some keras syntax of an older version but i have it in gitignore to avoid clutter if you face a problem with it not finding keras.engine change it to keras.layers and run python setup.py install to install the fixed dependency, you get the point
