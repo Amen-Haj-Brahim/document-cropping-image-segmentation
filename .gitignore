@@ -1,3 +1,4 @@
 /.vscode
 /document_segmentation/test_images
 /document_segmentation/mask_rcnn_balloon.h5
+/document_segmentation/mask_rcnn_coco.h5
