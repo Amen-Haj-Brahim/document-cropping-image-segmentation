@@ -133,12 +133,11 @@ class CocoLikeDataset(utils.Dataset):
 ##############################
 
 dataset_train = CocoLikeDataset()
-dataset_train.load_data('data/result.json', 'data/train')
+dataset_train.load_data('data/train/result.json', 'data/train')
 dataset_train.prepare()
 
-#In this example, I do not have annotations for my validation data, so I am loading train data
 dataset_val = CocoLikeDataset()
-dataset_val.load_data('data/result.json', 'data/train')
+dataset_val.load_data('data/train/result.json', 'data/train')
 dataset_val.prepare()
 
 
@@ -148,7 +147,7 @@ image_ids = dataset.image_ids
 for image_id in image_ids:
     image = dataset.load_image(image_id)
     mask, class_ids = dataset.load_mask(image_id)
-    display_top_masks(image, mask, class_ids, dataset.class_names, limit=2)  #limit to total number of classes
+    #display_top_masks(image, mask, class_ids, dataset.class_names, limit=2)  #limit to total number of classes
 
 
 
@@ -169,28 +168,29 @@ display_instances(image, bbox, mask, class_ids, dataset_train.class_names)
 
 
 # define a configuration for the model
-class MarbleConfig(Config):
+class PaperConfig(Config):
 	# define the name of the configuration
-	NAME = "marble_cfg_coco"
-	# number of classes (background + blue marble + non-Blue marble)
-	NUM_CLASSES = 1 + 2
+	NAME = "paper_cfg_coco"
+
+	NUM_CLASSES = 1 + 1
 	# number of training steps per epoch
-	STEPS_PER_EPOCH = 100
+	STEPS_PER_EPOCH = 1
     #DETECTION_MIN_CONFIDENCE = 0.9 # Skip detections with < 90% confidence
 # prepare config
-config = MarbleConfig()
+config = PaperConfig()
 config.display() 
 
 
 
 
 ROOT_DIR = os.path.abspath("./")
+print(ROOT_DIR+"---------------------------------------")
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
 # Directory to save logs and trained model
 DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 # Path to trained weights file
-COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "coco_weights/mask_rcnn_coco.h5")
+COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
 
 ########################
 #Weights are saved to root D: directory. need to investigate how they can be
@@ -203,7 +203,9 @@ model = MaskRCNN(mode='training', model_dir=DEFAULT_LOGS_DIR, config=config)
 # load weights (mscoco) and exclude the output layers
 model.load_weights(COCO_WEIGHTS_PATH, by_name=True, exclude=["mrcnn_class_logits", "mrcnn_bbox_fc",  "mrcnn_bbox", "mrcnn_mask"])
 # train weights (output layers or 'heads')
-model.train(dataset_train, dataset_train, learning_rate=config.LEARNING_RATE, epochs=25, layers='heads')
+import tensorflow as tf
+with tf.device('/gpu:0'):
+    model.train(dataset_train, dataset_train, learning_rate=config.LEARNING_RATE, epochs=2, layers='heads')
 
 
 ###################################################
@@ -218,9 +220,9 @@ from matplotlib.patches import Rectangle
 # define the prediction configuration
 class PredictionConfig(Config):
 	# define the name of the configuration
-	NAME = "marble_cfg_coco"
-	# number of classes (background + Blue Marbles + Non Blue marbles)
-	NUM_CLASSES = 1 + 2
+	NAME = "paper_cfg_coco"
+
+	NUM_CLASSES = 1 + 1
 	# Set batch size to 1 since we'll be running inference on
             # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
 	GPU_COUNT = 1
@@ -254,7 +256,7 @@ cfg = PredictionConfig()
 # define the model
 model = MaskRCNN(mode='inference', model_dir='logs', config=cfg)
 # load model weights
-model.load_weights('logs/mask_rcnn_marble_cfg_coco_0003.h5', by_name=True)
+model.load_weights('logs/mask_rcnn_paper_cfg_coco_0003.h5', by_name=True)
 # evaluate model on training dataset
 train_mAP = evaluate_model(dataset_train, model, cfg)
 print("Train mAP: %.3f" % train_mAP)
@@ -264,13 +266,13 @@ print("Train mAP: %.3f" % train_mAP)
 
 #################################################
 #Test on a single image
-marbles_img = skimage.io.imread("marble_dataset/val/test1.jpg")
-plt.imshow(marbles_img)
+paper_img = skimage.io.imread("paper_dataset/val/test1.jpg")
+plt.imshow(paper_img)
 
-detected = model.detect([marbles_img])
+detected = model.detect([paper_img])
 results = detected[0]
-class_names = ['BG', 'Blue_Marble', 'Non_Blue_Marble']
-display_instances(marbles_img, results['rois'], results['masks'], 
+class_names = ['BG', 'paper']
+display_instances(paper_img, results['rois'], results['masks'], 
                   results['class_ids'], class_names, results['scores'])
 
 ###############################
@@ -349,7 +351,7 @@ def detect_and_color_splash(model, image_path=None, video_path=None):
         vwriter.release()
     print("Saved to ", file_name)
 
-detect_and_color_splash(model, image_path="marble_dataset/val/test4.jpg")
+detect_and_color_splash(model, image_path="paper_dataset/val/test4.jpg")
 
 ######################################################
                          
