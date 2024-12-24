@@ -1,6 +1,6 @@
 # document-cropper by fine tuning Mask RCNN on a dataset of papers
 
-## Data is labeled in Coco json but you choose just change the implementation of data loading
+#### Data is labeled in Coco json but you choose just change the implementation of data loading
 
 To do next:
 ### get more data and label it
