@@ -9,3 +9,7 @@
 /document_segmentation/fine_tune/data/train
 /document_segmentation/fine_tune/data/test
 /document_segmentation/MRCNN
+/document_segmentation/Mask_RCNN/mrcnn
+/document_segmentation/mask_rcnn_paper_cfg_coco_0002.h5
+/document_segmentation/fine_tune/logs
+/document_segmentation/test_set

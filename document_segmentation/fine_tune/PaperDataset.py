@@ -174,7 +174,7 @@ class PaperConfig(Config):
 
 	NUM_CLASSES = 1 + 1
 	# number of training steps per epoch
-	STEPS_PER_EPOCH = 1
+	STEPS_PER_EPOCH = 50
     #DETECTION_MIN_CONFIDENCE = 0.9 # Skip detections with < 90% confidence
 # prepare config
 config = PaperConfig()
@@ -203,9 +203,7 @@ model = MaskRCNN(mode='training', model_dir=DEFAULT_LOGS_DIR, config=config)
 # load weights (mscoco) and exclude the output layers
 model.load_weights(COCO_WEIGHTS_PATH, by_name=True, exclude=["mrcnn_class_logits", "mrcnn_bbox_fc",  "mrcnn_bbox", "mrcnn_mask"])
 # train weights (output layers or 'heads')
-import tensorflow as tf
-with tf.device('/gpu:0'):
-    model.train(dataset_train, dataset_train, learning_rate=config.LEARNING_RATE, epochs=2, layers='heads')
+model.train(dataset_train, dataset_train, learning_rate=config.LEARNING_RATE, epochs=2, layers='heads')
 
 
 ###################################################
