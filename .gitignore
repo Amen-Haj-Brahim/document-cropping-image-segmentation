@@ -1,32 +1,5 @@
 /.vscode
-/document_segmentation/test_images
-/document_segmentation/mask_rcnn_balloon.h5
-/document_segmentation/mask_rcnn_coco.h5
-/document_segmentation/.venv
-/document_segmentation/fine_tune/project-2-at-2024-12-24-13-18-f30435c3.zip
-/document_segmentation/fine_tune/mask_rcnn_coco.h5
-/document_segmentation/fine_tune/data/images
-/document_segmentation/fine_tune/data/train
-/document_segmentation/fine_tune/data/test
-/document_segmentation/MRCNN
-/document_segmentation/Mask_RCNN/mrcnn
-/document_segmentation/mask_rcnn_paper_cfg_coco_0002.h5
-/document_segmentation/fine_tune/logs
-/document_segmentation/test_set
-/document_segmentation/mask_rcnn_failed_try_ignore_this/MRCNN
-/document_segmentation/mask_rcnn_failed_try_ignore_this/Mask_RCNN
-/document_segmentation/mask_rcnn_failed_try_ignore_this/.venv
 /document_segmentation/yolo/.venv
 /document_segmentation/yolo/data
 /document_segmentation/yolo/runs/segment
-/document_segmentation/mask_rcnn_failed_try_ignore_this/fine_tune/data
-/document_segmentation/mask_rcnn_failed_try_ignore_this/fine_tune/logs
-/document_segmentation/mask_rcnn_failed_try_ignore_this/test_images
-/document_segmentation/mask_rcnn_failed_try_ignore_this/test_set
-/document_segmentation/mask_rcnn_failed_try_ignore_this/fine_tune/mask_rcnn_coco.h5
 /document_segmentation/yolo/yolov8n-seg.pt
-/document_segmentation/for your sanity ignore this it's a mrcnn failed try/Mask_RCNN
-/document_segmentation/for your sanity ignore this it's a mrcnn failed try/MRCNN
-/document_segmentation/for your sanity ignore this it's a mrcnn failed try/test_images
-/document_segmentation/for your sanity ignore this it's a mrcnn failed try/test_set
-/document_segmentation/for your sanity ignore this it's a mrcnn failed try/fine_tune
