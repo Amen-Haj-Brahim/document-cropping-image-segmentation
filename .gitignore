@@ -13,3 +13,14 @@
 /document_segmentation/mask_rcnn_paper_cfg_coco_0002.h5
 /document_segmentation/fine_tune/logs
 /document_segmentation/test_set
+/document_segmentation/mask_rcnn_failed_try_ignore_this/MRCNN
+/document_segmentation/mask_rcnn_failed_try_ignore_this/Mask_RCNN
+/document_segmentation/mask_rcnn_failed_try_ignore_this/.venv
+/document_segmentation/yolo/.venv
+/document_segmentation/yolo/data
+/document_segmentation/yolo/runs/segment
+/document_segmentation/mask_rcnn_failed_try_ignore_this/fine_tune/data
+/document_segmentation/mask_rcnn_failed_try_ignore_this/fine_tune/logs
+/document_segmentation/mask_rcnn_failed_try_ignore_this/test_images
+/document_segmentation/mask_rcnn_failed_try_ignore_this/test_set
+/document_segmentation/mask_rcnn_failed_try_ignore_this/fine_tune/mask_rcnn_coco.h5
