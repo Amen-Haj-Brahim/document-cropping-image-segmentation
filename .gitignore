@@ -3,3 +3,4 @@
 /document_segmentation/yolo/data
 /document_segmentation/yolo/runs/segment
 /document_segmentation/yolo/yolov8n-seg.pt
+document_segmentation/yolo/yolo11n.pt
