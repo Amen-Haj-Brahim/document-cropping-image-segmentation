@@ -14,6 +14,6 @@
 
 # authors
 
-[@Amen-Haj-Brahim] (https://www.github.com/Amen-Haj-Brahim)
-[@BoubakerMajdi] (https://github.com/BoubakerMajdi)
-[@Chattimen] (https://github.com/chattimen)
+@Amen-Haj-Brahim https://www.github.com/Amen-Haj-Brahim<br>
+@BoubakerMajdi https://github.com/BoubakerMajdi<br>
+@Chattimen https://github.com/chattimen<br>
