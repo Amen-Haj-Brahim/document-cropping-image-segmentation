@@ -1,9 +1,18 @@
-# document-cropper by fine tuning Mask RCNN on a dataset of papers
+# document-cropper with fine tuned yolov8seg-nano on a dataset of papers
 
-#### Data is labeled in yolov8 format but you choose just change the implementation of data loading
-#state : horrible
+### The app crops the document from an image using image segmentation, for now we have a mobile app and a streamlit app and make a web app.
 
-To do next:
-### get more data and label it
-### train on new set
-### crop the segmented output and integrate it in a flask api for the web app as well as a streamlit version
+# to do next:
+
+- mobile app
+- test performance on various phones
+- quantize model to int8 and compare to float16
+- streamlit
+- web app
+- retrain on more data
+- maybe maintain the project
+
+# authors
+@Amen-Haj-Brahim
+@BoubakerMajdi
+@Chattimen
