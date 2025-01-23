@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(cameraIntent, REQUEST_CAMERA)
     }
 
+
     private fun openGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, REQUEST_GALLERY)
