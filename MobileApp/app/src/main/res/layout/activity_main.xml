@@ -25,6 +25,14 @@
             android:layout_height="wrap_content"
             android:text="Select from Gallery"
             android:layout_marginTop="16dp" />
+        <ImageView
+            android:id="@+id/processed_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:contentDescription="processed Image"/>
     </LinearLayout>
 
 
