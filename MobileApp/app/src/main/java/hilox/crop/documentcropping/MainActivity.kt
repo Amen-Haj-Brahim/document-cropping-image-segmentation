@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         val btnCamera: Button = findViewById(R.id.btn_camera)
         val btnGallery: Button = findViewById(R.id.btn_gallery)
+        processedImageView = findViewById(R.id.processed_image)
+
 
         btnCamera.setOnClickListener { openCamera() }
         btnGallery.setOnClickListener { openGallery() }
@@ -61,22 +63,44 @@ class MainActivity : AppCompatActivity() {
 
     private fun processAndDisplayImage(inputBitmap: Bitmap) {
         //resizing the bitmap to match model Input Size 640
-        val modelInputSize= 640
-        val resizedBitmap = Bitmap.createScaledBitmap(inputBitmap, modelInputSize,modelInputSize, false);
+        //val modelInputSize= 640
+        //val resizedBitmap = Bitmap.createScaledBitmap(inputBitmap, modelInputSize,modelInputSize, false);
 
         //this part for loading the TFLite model and processing the img
 
-        val interpreter = org.tensorflow.lite.Interpreter(FileUtil.loadMappedFile(this," best_float16.tflite"))
+        val interpreter = org.tensorflow.lite.Interpreter(FileUtil.loadMappedFile(this,"best_float16.tflite"))
 
-        val tensorImage = TensorImage.fromBitmap(resizedBitmap)
+        val inputShape = interpreter.getInputTensor(0).shape()
+        val inputImageWidth = inputShape[1]
+        val inputImageHeight = inputShape[2]
+        val modelInputSize = inputImageWidth * inputImageHeight * 3
+
+
+        println(inputShape)
+
+        println(modelInputSize)
+
+        val resizedBitmap = Bitmap.createScaledBitmap(inputBitmap, inputImageWidth, inputImageHeight, false)
+
+        println("----------------------------------------------------------")
+        println(inputShape)
+
+        println(modelInputSize)
+
+        val tensorImage = TensorImage(interpreter.getInputTensor(0).dataType())
+        tensorImage.load(resizedBitmap)
         val inputBuffer = tensorImage.buffer
 
-        val outputShape = intArrayOf(1,modelInputSize, modelInputSize,3)
+        val outputShape = interpreter.getOutputTensor(0).shape()
+        println("##########################################################")
+        println(outputShape)
         val outputBuffer = TensorBuffer.createFixedSize(outputShape, tensorImage.dataType)
 
         interpreter.run(inputBuffer, outputBuffer.buffer)
 
-        val outputBitmap = ByteBufferToBitmap(outputBuffer.buffer,modelInputSize,modelInputSize)
+        println("#########---------------***********************")
+
+        val outputBitmap = ByteBufferToBitmap(outputBuffer.buffer,inputImageWidth,inputImageHeight)
 
         processedImageView.setImageBitmap(outputBitmap)
 
